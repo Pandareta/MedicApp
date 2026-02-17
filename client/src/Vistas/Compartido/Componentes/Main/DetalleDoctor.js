@@ -42,8 +42,12 @@ function DetalleDoctor (){
 
   let appointments = useSelector((state)=>  state.generalAppointments.appointmentsFiltered)
 
-  let appointmentsFiltered =  appointments?.filter(app => {
-    return( app.doctor._id === idDoctor)
+  let appointmentsFiltered = appointments?.filter(app => {
+    if (!idDoctor || !app.doctor || !app.doctor._id) {
+      console.warn('Missing idDoctor or doctor data:', { idDoctor, appDoctor: app.doctor });
+      return false;
+    }
+    return app.doctor._id === idDoctor;
   })
 
   let comentariosDoc = appointmentsFiltered?.filter(app => {
@@ -54,12 +58,16 @@ function DetalleDoctor (){
   console.log(comentariosDoc, 'los comments');
 
   useEffect(() => {
+    if (!idDoctor) {
+      console.error('idDoctor is undefined - cannot fetch doctor details');
+      return;
+    }
     dispatch(getDocbyId(idDoctor),
     handleMapa(),
     )
     dispatch(getAppointments())
     
-  },[dispatch, doctor?.rating, idDoctor,]);
+  },[dispatch, doctor?.rating, idDoctor],);
   
   useEffect(() => {
     return () => {
