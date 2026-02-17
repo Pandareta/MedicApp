@@ -43,11 +43,12 @@ function DetalleDoctor (){
   let appointments = useSelector((state)=>  state.generalAppointments.appointmentsFiltered)
 
   let appointmentsFiltered = appointments?.filter(app => {
-    if (!idDoctor || !app.doctor || !app.doctor._id) {
-      console.warn('Missing idDoctor or doctor data:', { idDoctor, appDoctor: app.doctor });
+    const doctorId = app.doctor?._id || app.doctor?.id; // Support both _id and id
+    if (!idDoctor || !doctorId) {
+      console.warn('Missing idDoctor or doctor data:', { idDoctor, appDoctor: app.doctor, doctorId });
       return false;
     }
-    return app.doctor._id === idDoctor;
+    return doctorId === idDoctor || doctorId.toString() === idDoctor;
   })
 
   let comentariosDoc = appointmentsFiltered?.filter(app => {

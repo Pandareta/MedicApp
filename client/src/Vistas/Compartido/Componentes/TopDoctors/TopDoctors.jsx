@@ -36,7 +36,12 @@ const TopDoctors = ({id, name, specialities, rating, schedule, address, image, p
             </span>
             <span> <img src={iconAdress} alt="alt-icon-adress"/>{address}</span>
           </div>
-          <Link to={ rol === 'ADMIN' ?  `/admin/doctors/${id}` : rol === 'DOCTOR' ?  `/doctor/doctors/${id}` : rol === 'PATIENT' ?  `/patient/doctors/${id}` : `/doctors/${id}`  }>
+          <Link to={ rol === 'ADMIN' ?  `/admin/doctors/${id || 'unknown'}` : rol === 'DOCTOR' ?  `/doctor/doctors/${id || 'unknown'}` : rol === 'PATIENT' ?  `/patient/doctors/${id || 'unknown'}` : `/doctors/${id || 'unknown'}`  } onClick={(e) => {
+            if (!id) {
+              console.warn('TopDoctors: id is undefined, preventing navigation');
+              e.preventDefault();
+            }
+          }}>
           Ver Perfil
           </Link>
         </div>

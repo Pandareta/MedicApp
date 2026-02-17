@@ -40,10 +40,11 @@ export default function DoctorsRoster() {
       <section className={styles.ContainerCards}>
         {displayedBadges.length === 0 ? <img className={styles.NotFound} src={NotFound} alt="not-found"/>  : displayedBadges.map((doctor) => {
           const splitAddress = doctor.address.split(",");
+          const doctorId = doctor._id || doctor.id; // Support both _id (real DB) and id (dummy)
           return (
             <TopDoctors 
-            key = {doctor._id} 
-            id = {doctor._id}
+            key = {doctorId} 
+            id = {doctorId}
             name = {doctor.name}
             specialities = {doctor.specialities}
             rating = {doctor.rating}
