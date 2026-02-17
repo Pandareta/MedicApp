@@ -80,6 +80,9 @@ web_modules/
 .env.production.local
 .env.local
 
+# Ignore api local .env specifically
+/api/.env
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
