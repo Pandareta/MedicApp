@@ -74,7 +74,7 @@ export const sortDocsByPrice = (type) => (dispatch) => {
 
 export const likesDoctor = (doctorId) => async (dispatch) => {
   try {
-    const {data} = await axios.get(`http://localhost:3004/favorites/likes/${doctorId}`, {
+    const {data} = await axios.get(`/favorites/likes/${doctorId}`, {
       //headers: { Authorization: `Bearer ${token}`}
       headers: { Authorization: `Bearer ${JSON.parse(window.localStorage.getItem('auth-token'))}`}
     });

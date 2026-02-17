@@ -84,7 +84,7 @@ export const getPatientToken = () => async (dispatch) => {
 
 export const getPatientFavorites = () => async (dispatch) => {
   try {
-    const {data} = await axios('http://localhost:3004/favorites/likes',{
+    const {data} = await axios('/favorites/likes',{
       headers: { Authorization : `Bearer ${JSON.parse(window.localStorage.getItem('auth-token'))}`}
     });
     console.log(data.data);

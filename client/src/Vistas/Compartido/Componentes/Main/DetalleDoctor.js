@@ -118,7 +118,7 @@ function DetalleDoctor (){
 			idDoctor: idDoctor,
 			enable: like ? false : true
 		}
-		const fav = await axios('http://localhost:3004/favorites/add', {
+    const fav = await axios('/favorites/add', {
 			method: 'POST',
 			headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('auth-token'))}` },
 			data: data
