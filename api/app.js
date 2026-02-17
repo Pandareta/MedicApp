@@ -8,10 +8,14 @@ var indexRouter = require("./src/routes/index");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-mongoose
-  .connect(process.env.MONGODB_URI || "mongodb+srv://esteban:12345@mediapp.yasrnqu.mongodb.net/test")
-  .then((res) => console.log("DB is connected"))
-  .catch((error) => console.log(error));
+if (process.env.USE_FAKE_DB === 'true') {
+  console.log('USE_FAKE_DB=true -> Skipping MongoDB connection, using dummy data routes');
+} else {
+  mongoose
+    .connect(process.env.MONGODB_URI || "mongodb+srv://esteban:12345@mediapp.yasrnqu.mongodb.net/test")
+    .then((res) => console.log("DB is connected"))
+    .catch((error) => console.log(error));
+}
 require("./src/models/Admin");
 
 var app = express();
